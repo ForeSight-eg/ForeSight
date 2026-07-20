@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Advantage — ForeSight</title>
+<meta name="description" content="What makes ForeSight different: an Executive Control Layer that connects vision, strategy, execution and KPIs into one decision platform." />
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="advantage">
+<div id="site-header"></div>
+
+<section class="hero">
+  <div class="container px-6 hero-inner">
+    <h1>An Executive <span class="text-teal">Remote Control</span> for your organization.</h1>
+    <p class="subtitle">In fast-moving organizations the real challenge isn't lack of data — it's lack of control, clarity and foresight. ForeSight delivers a Power BI–based system that turns leadership intent into measurable outcomes.</p>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="container px-6">
+    <p class="eyebrow">From vision to action — one continuous line</p>
+    <h2 class="section-title max-w-3xl">Executives don't need more reports. They need alignment.</h2>
+    <div class="grid grid-3" style="grid-template-columns:repeat(2,1fr); gap:1rem;" id="flow-grid"></div>
+    <p class="mt-8 muted max-w-3xl">All linked, traceable and visible in real time. No fragmentation. No interpretation gaps. No blind spots.</p>
+  </div>
+</section>
+
+<section class="bg-secondary py-16">
+  <div class="container px-6">
+    <h2 class="section-title max-w-3xl">A decision-support capability — not a static dashboard.</h2>
+    <div class="grid grid-2 mt-10" style="gap:1.5rem;" id="benefits-grid"></div>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="container px-6">
+    <p class="eyebrow">One platform, every level</p>
+    <h2 class="section-title max-w-3xl">Personalized by role. Customized to your operating model.</h2>
+    <div class="grid" style="grid-template-columns:repeat(2,1fr); gap:1rem; margin-top:2rem;" id="roles-grid"></div>
+  </div>
+</section>
+
+<section class="bg-midnight" style="padding:5rem 0;">
+  <div class="container px-6 text-center max-w-3xl" style="margin:0 auto;">
+    <p style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.3em; color:var(--teal);">In one sentence</p>
+    <p class="mt-6" style="font-size:1.5rem; font-weight:600; line-height:1.4;">ForeSight gives executives <span class="text-teal">remote control</span> over the organization — aligning vision, strategy, execution and metrics into one clear, powerful decision platform.</p>
+    <a href="book-demo.html" class="btn-teal mt-10" style="display:inline-flex;">Book a working session</a>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/components.js"></script>
+<script>
+  const flow = [
+    { label: "Vision", desc: "What the organization aims to become.", icon: "🧭" },
+    { label: "Strategy", desc: "How leadership chooses to compete and grow.", icon: "🌿" },
+    { label: "Execution", desc: "What teams are actually delivering.", icon: "🔀" },
+    { label: "KPIs", desc: "How progress is objectively measured.", icon: "📊" },
+  ];
+  document.getElementById("flow-grid").innerHTML = flow
+    .map(
+      (f, i) => `<div class="card">
+        <div class="flex items-center gap-3">
+          <div class="icon-box ${i % 2 === 1 ? "icon-orange" : "icon-teal"}">${f.icon}</div>
+          <span style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.15em; color:var(--muted-foreground);">Step 0${i + 1}</span>
+        </div>
+        <h3 class="mt-4" style="font-size:1.125rem;">${f.label}</h3>
+        <p class="mt-2 muted" style="font-size:0.875rem;">${f.desc}</p>
+      </div>`
+    )
+    .join("");
+
+  const benefits = [
+    { t: "Insight, not information", d: "Spot deviations instantly. Understand why results changed — not just that they changed. Drill from board KPIs to operational root causes.", icon: "👁️" },
+    { t: "Built for the future", d: "Trend analysis, scenario comparison and capability tracking. A scalable architecture that grows with new KPIs, units and markets.", icon: "📈" },
+    { t: "Quality by design", d: "High-quality data models for trust and reliability. Clean, executive-grade interface — minimal learning curve, accessible anywhere.", icon: "🛡️" },
+    { t: "Maximized executive capability", d: "Faster decisions, better prioritization, clear ownership. Less chasing data — more time spent thinking and leading.", icon: "⚡" },
+  ];
+  document.getElementById("benefits-grid").innerHTML = benefits
+    .map(
+      (b) => `<div class="card">
+        <div class="icon-box" style="background:var(--midnight); color:var(--teal);">${b.icon}</div>
+        <h3 class="mt-4" style="font-size:1.25rem;">${b.t}</h3>
+        <p class="mt-2 muted">${b.d}</p>
+      </div>`
+    )
+    .join("");
+
+  const roles = [
+    { r: "C-Level", d: "Vision, strategic KPIs, scenarios" },
+    { r: "Directors", d: "Portfolio health, allocation, risk" },
+    { r: "Managers", d: "Team objectives, throughput, quality" },
+    { r: "Middle level", d: "Execution, milestones, dependencies" },
+    { r: "Operators", d: "Daily tasks, inputs, live signals" },
+  ];
+  document.getElementById("roles-grid").innerHTML = roles
+    .map(
+      (x) => `<div class="card" style="background:var(--midnight); color:var(--background);">
+        <div style="font-size:0.75rem; font-weight:700; text-transform:uppercase; letter-spacing:0.1em; color:var(--teal);">${x.r}</div>
+        <div class="mt-2" style="font-size:0.875rem; color:color-mix(in oklab, var(--background) 80%, transparent);">${x.d}</div>
+      </div>`
+    )
+    .join("");
+</script>
+</body>
+</html>

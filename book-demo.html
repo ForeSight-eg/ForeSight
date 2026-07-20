@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Book a demo — ForeSight</title>
+<meta name="description" content="Book a personalized demo of ForeSight's KPI-first dashboards and analytics services." />
+<link rel="icon" href="assets/favicon.png" />
+<link rel="stylesheet" href="css/styles.css" />
+</head>
+<body data-page="book-demo">
+<div id="site-header"></div>
+
+<section class="hero">
+  <div class="container px-6 hero-inner">
+    <h1>See ForeSight in <span class="text-teal">action</span>.</h1>
+    <p class="subtitle">A focused 1-hour working session. Bring a real KPI question — we'll show how a ForeSight Executive Control Layer would answer it. No slides, just signal.</p>
+  </div>
+</section>
+
+<section class="py-16">
+  <div class="container px-6" style="display:grid; gap:3rem; grid-template-columns:1.2fr 1fr;">
+    <form id="demo-form" class="form-card">
+      <div class="form-row two">
+        <div class="field"><label for="d-name">Full name</label><input id="d-name" name="name" required /></div>
+        <div class="field"><label for="d-email">Work email</label><input id="d-email" name="email" type="email" required /></div>
+      </div>
+      <div class="form-row two">
+        <div class="field"><label for="d-company">Company</label><input id="d-company" name="company" required /></div>
+        <div class="field"><label for="d-role">Role / Title</label><input id="d-role" name="role" /></div>
+      </div>
+      <div class="form-row two">
+        <div class="field"><label for="d-phone">Phone</label><input id="d-phone" name="phone" type="tel" /></div>
+        <div class="field">
+          <label for="d-size">Company size</label>
+          <select id="d-size" name="companySize">
+            <option>1–10</option><option>11–50</option><option>51–200</option><option>201–1,000</option><option>1,000+</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field">
+          <label for="d-interest">Area of interest</label>
+          <select id="d-interest" name="interest">
+            <option>Descriptive analytics &amp; dashboards</option>
+            <option>Diagnostic analytics</option>
+            <option>Predictive analytics &amp; forecasting</option>
+            <option>Prescriptive analytics &amp; optimization</option>
+            <option>KPI strategy &amp; training</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="d-question">What would you like to see in the demo?</label><textarea id="d-question" name="message" rows="4"></textarea></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="d-time">Preferred time</label><input id="d-time" name="preferredTime" type="datetime-local" /></div>
+      </div>
+      <p class="form-error" id="demo-error" style="display:none;"></p>
+      <button type="submit" class="btn-teal" style="width:100%; justify-content:center;" id="demo-submit">Request my demo</button>
+    </form>
+
+    <aside style="display:flex; flex-direction:column; gap:2rem;">
+      <div class="card" style="background:var(--midnight); color:var(--background);">
+        <p class="eyebrow-teal">What to expect</p>
+        <p class="mt-3" style="font-size:0.75rem; color:color-mix(in oklab, var(--background) 60%, transparent);">A focused 1-hour working session</p>
+        <ul class="mt-4" style="display:flex; flex-direction:column; gap:0.75rem; font-size:0.875rem; color:color-mix(in oklab, var(--background) 80%, transparent);">
+          <li>• 15 min — your context, organization &amp; top KPI questions</li>
+          <li>• 15 min — live walkthrough of the Executive Control Layer</li>
+          <li>• 30 min — scoping, role-based design &amp; next steps</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="eyebrow">Or reach us directly</h3>
+        <div class="mt-3" style="font-size:1.125rem; font-weight:500;">
+          <div>hello@foresight.com</div>
+          <div>Cairo · Riyadh · Dubai</div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<div id="site-footer"></div>
+
+<script src="js/config.js"></script>
+<script src="js/forms.js"></script>
+<script src="js/components.js"></script>
+<script>
+  const form = document.getElementById("demo-form");
+  const errorEl = document.getElementById("demo-error");
+  const submitBtn = document.getElementById("demo-submit");
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    errorEl.style.display = "none";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending…";
+
+    const fd = new FormData(form);
+    const data = {
+      name: fd.get("name") || "",
+      email: fd.get("email") || "",
+      company: fd.get("company") || "",
+      role: fd.get("role") || "",
+      phone: fd.get("phone") || "",
+      companySize: fd.get("companySize") || "",
+      interest: fd.get("interest") || "",
+      message: fd.get("message") || "",
+      preferredTime: fd.get("preferredTime") || "",
+    };
+
+    const result = await submitToGoogleSheet("Demo Requests", data);
+    if (result.ok) {
+      submitBtn.textContent = "Thanks — we'll reach out within 1 business day ✓";
+    } else {
+      errorEl.textContent = "Something went wrong. Please email hello@foresight.com directly, or check js/config.js if you're the site owner.";
+      errorEl.style.display = "block";
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Request my demo";
+    }
+  });
+</script>
+</body>
+</html>
